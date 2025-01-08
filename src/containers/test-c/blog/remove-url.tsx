@@ -31,6 +31,7 @@ const RemoveUrl = ({
           />
         </div>
         <Button
+          disabled={!getValues().address}
           onClick={() => {
             handleRemoveUrl(id);
             handleReset();
