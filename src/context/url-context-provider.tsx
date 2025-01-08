@@ -8,6 +8,7 @@ type TUrlContext = {
   isDuplicatedContent: boolean;
   handleAddUrls: (newUrl: Turl) => void;
   handleRemoveUrl: (id: number | undefined) => void;
+  handleRemoveErrorDuplicate: () => void;
 };
 export const UrlContext = createContext<TUrlContext | null>(null);
 
@@ -30,9 +31,17 @@ const UrlContextProvider = ({ children }: { children: React.ReactNode }) => {
     setUrls(filteredUrl);
   };
 
+  const handleRemoveErrorDuplicate = () => setIsDuplicatedContent(false);
+
   return (
     <UrlContext.Provider
-      value={{ urls, handleAddUrls, handleRemoveUrl, isDuplicatedContent }}
+      value={{
+        urls,
+        handleAddUrls,
+        handleRemoveUrl,
+        isDuplicatedContent,
+        handleRemoveErrorDuplicate,
+      }}
     >
       {children}
     </UrlContext.Provider>

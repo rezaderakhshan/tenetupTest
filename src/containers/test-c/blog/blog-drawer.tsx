@@ -31,7 +31,7 @@ const BlogDrawer = ({ label }: BlogDrawerProps) => {
   const { register, getValues, handleSubmit, formState, reset } =
     useForm<FormType>();
   const { errors } = formState;
-  const { handleAddUrls } = useUrlContext();
+  const { handleAddUrls, handleRemoveErrorDuplicate } = useUrlContext();
   const ref = useRef<undefined | number>();
 
   const onSubmit = (data: { address: string }) => {
@@ -42,6 +42,7 @@ const BlogDrawer = ({ label }: BlogDrawerProps) => {
 
   const handleReset = () => {
     reset();
+    handleRemoveErrorDuplicate();
   };
 
   return (
@@ -53,7 +54,7 @@ const BlogDrawer = ({ label }: BlogDrawerProps) => {
             <div className="flex w-full items-center justify-between px-[33px]">
               <span>{label}</span>
               <DrawerClose>
-                <Button onClick={() => reset()} className="text-2xl">
+                <Button onClick={handleReset} className="text-2xl">
                   &times;
                 </Button>
               </DrawerClose>
@@ -87,7 +88,7 @@ const BlogDrawer = ({ label }: BlogDrawerProps) => {
         </DrawerHeader>
         <DrawerFooter className="flex border border-[#E4E4E7]">
           <DrawerClose className="ml-auto">
-            <Button onClick={() => reset()} variant="outline">
+            <Button onClick={handleReset} variant="outline">
               Cancel
             </Button>
           </DrawerClose>
